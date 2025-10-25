@@ -6,8 +6,8 @@ nw = NeedlemanWunsch(match=1, mismatch=-1, gap=-2)
 sw = SmithWaterman(match=1, mismatch=-1, gap=-2)
 
 # Secuencias de prueba
-seq1 = "AGRCTAR"
-seq2 = "AACTA"
+seq1 = "GCATGCU"
+seq2 = "GATTACA"
 
 # Probar NW
 alin1_nw, alin2_nw, score_nw, matriz_nw = nw.alignment(seq1, seq2)

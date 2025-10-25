@@ -50,12 +50,24 @@ def validate_protein(sequence):
 
 def load_sequence_from_file(filepath):
     """
-    Carga una secuencia desde un archivo de texto
+    Carga una secuencia desde un archivo de texto.
+    - Formatos FASTA y texto plano.
     """
     try:
-        with open(filepath, 'r') as f:
-            # Leer y limpiar la secuencia (remover espacios y saltos de línea)
-            sequence = ''.join(line.strip() for line in f)
+        with open(filepath, 'r', encoding='utf-8') as f:
+            sequence = ''
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('>') and not line.startswith(';'):
+                    cleaned = ''.join(c for c in line if c.isalpha())
+                    sequence += cleaned
+            
+            if not sequence:
+                raise ValueError(f"El archivo {filepath} no contiene secuencia válida")
+            
             return sequence.upper()
+    
     except FileNotFoundError:
         raise FileNotFoundError(f"No se encontró el archivo: {filepath}")
+    except Exception as e:
+        raise Exception(f"Error al leer el archivo {filepath}: {str(e)}")

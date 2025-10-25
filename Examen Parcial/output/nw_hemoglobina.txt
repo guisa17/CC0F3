@@ -1,0 +1,34 @@
+================================================================================
+                                NW: Hemoglobina                                 
+================================================================================
+
+Secuencia 1 original (142 caracteres):
+MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKLRVDPVNFKLLSHCLLVTLAAHLPAEFTPAVHASLDKFLASVSTVLTSKYR
+
+Secuencia 2 original (142 caracteres):
+MVLSPADKTNIKTAWEKIGSHGGEYGAEAVERMFLGFPTTKTYFPHFDFTHGSEQIKAHGKKVSEALTKAVGHLDDLPGALSTLSDLHAHKLRVDPVNFKLLSHCLLVTLANHHPSEFTPAVHASLDKFLANVSTVLTSKYR
+
+================================================================================
+ALINEAMIENTO COMPLETO
+================================================================================
+
+Posición 1-80:
+Seq1: MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHGKKVADALTNAVAHVDDMPNA
+      ||||||||||.|.||.|.|.|.|||||||.|||||.||||||||||||..|||.|.|.|||||..|||.||.|.||.|.|
+Seq2: MVLSPADKTNIKTAWEKIGSHGGEYGAEAVERMFLGFPTTKTYFPHFDFTHGSEQIKAHGKKVSEALTKAVGHLDDLPGA
+
+Posición 81-142:
+Seq1: LSALSDLHAHKLRVDPVNFKLLSHCLLVTLAAHLPAEFTPAVHASLDKFLASVSTVLTSKYR
+      ||.||||||||||||||||||||||||||||.|.|.|||||||||||||||.||||||||||
+Seq2: LSTLSDLHAHKLRVDPVNFKLLSHCLLVTLANHHPSEFTPAVHASLDKFLANVSTVLTSKYR
+
+================================================================================
+ESTADÍSTICAS
+================================================================================
+
+Puntuación total:        92
+Longitud alineamiento:   142 caracteres
+Matches:                 117
+Mismatches:              25
+Gaps totales:            0
+Identidad:               82.39%
