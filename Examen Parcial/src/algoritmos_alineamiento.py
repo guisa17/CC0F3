@@ -1,3 +1,5 @@
+from .utils import validate_dna, validate_protein
+
 class AlgoritmoAlineamiento:
     def __init__(self, match=1, mismatch=-1, gap=-2):
         """
@@ -15,10 +17,24 @@ class AlgoritmoAlineamiento:
         else:
             return self.mismatch
     
-    def validate_seqs(self, seq1, seq2):
+    def validate_seqs(self, seq1, seq2, seq_type=None):
         if not seq1 or not seq2:
             raise ValueError("Las secuencias no pueden estar vacías.")
+
+        if seq_type == "dna":
+            if not validate_dna(seq1):
+                raise ValueError("La secuencia 1 no es una secuencia de ADN válida.")   
+            if not validate_dna(seq2):
+                raise ValueError("La secuencia 2 no es una secuencia de ADN válida.")
+
+        elif seq_type == "protein":
+            if not validate_protein(seq1):
+                raise ValueError("La secuencia 1 no es una secuencia de proteínas válida.")
+            if not validate_protein(seq2):
+                raise ValueError("La secuencia 2 no es una secuencia de proteínas válida.")
+
         return True
+
 
 # ===============================================================================
 class NeedlemanWunsch(AlgoritmoAlineamiento):

@@ -1,3 +1,6 @@
+from .utils import calculate_identity, count_gaps, count_matches, count_mismatches
+
+
 def print_matrix(matrix, seq1, seq2, title="Matriz de Scoring"):
     """
     Imprime la matriz de forma legible con encabezados
@@ -31,6 +34,7 @@ def print_matrix(matrix, seq1, seq2, title="Matriz de Scoring"):
 def print_alignment(seq1, seq2, aligned1, aligned2, score, algorithm=""):
     """
     Imprime el alineamiento de forma visual con matches marcados
+    AHORA USA FUNCIONES DE utils.py
     """
     print(f"\n{'='*60}")
     print(f"{algorithm:^60}")
@@ -57,10 +61,10 @@ def print_alignment(seq1, seq2, aligned1, aligned2, score, algorithm=""):
     print(f"Puntuación total: {score}")
     
     # Estadísticas
-    matches = match_line.count('|')
-    gaps = aligned1.count('-') + aligned2.count('-')
-    mismatches = match_line.count('.')
-    identity = (matches / len(aligned1)) * 100 if len(aligned1) > 0 else 0
+    matches = count_matches(aligned1, aligned2)
+    mismatches = count_mismatches(aligned1, aligned2)
+    gaps = count_gaps(aligned1) + count_gaps(aligned2)
+    identity = calculate_identity(aligned1, aligned2)
     
     print(f"\nEstadísticas:")
     print(f"  - Matches:    {matches}")
@@ -117,19 +121,20 @@ def print_alignment_colored(seq1, seq2, aligned1, aligned2, score, algorithm="")
         print()
         print(f"Puntuación total: {score}")
         
-        # Estadísticas
-        matches = aligned1.count(aligned2) if len(aligned1) == len(aligned2) else sum(1 for a, b in zip(aligned1, aligned2) if a == b and a != '-')
-        gaps = aligned1.count('-') + aligned2.count('-')
-        identity = (matches / len(aligned1)) * 100 if len(aligned1) > 0 else 0
+        # Estadísticas USANDO utils.py
+        matches = count_matches(aligned1, aligned2)
+        mismatches = count_mismatches(aligned1, aligned2)
+        gaps = count_gaps(aligned1) + count_gaps(aligned2)
+        identity = calculate_identity(aligned1, aligned2)
         
         print(f"\nEstadísticas:")
         print(f"  - Matches:    {Fore.GREEN}{matches}")
+        print(f"  - Mismatches: {Fore.YELLOW}{mismatches}")
         print(f"  - Gaps:       {Fore.RED}{gaps}")
         print(f"  - Identidad:  {identity:.1f}%")
         print(f"{'='*60}\n")
         
     except ImportError:
-        # Usar versión sin colores
         print_alignment(seq1, seq2, aligned1, aligned2, score, algorithm)
 
 
@@ -156,4 +161,10 @@ def compare_algorithms(seq1, seq2, nw_result, sw_result):
     print()
     print(f"{'Puntuación: ' + str(nw_score):^40} | {'Puntuación: ' + str(sw_score):^40}")
     print(f"{'Longitud: ' + str(len(nw_alin1)):^40} | {'Longitud: ' + str(len(sw_alin1)):^40}")
+    
+    # Comparar identidades
+    nw_identity = calculate_identity(nw_alin1, nw_alin2)
+    sw_identity = calculate_identity(sw_alin1, sw_alin2)
+    print(f"{'Identidad: ' + f'{nw_identity:.1f}%':^40} | {'Identidad: ' + f'{sw_identity:.1f}%':^40}")
+    
     print(f"{'='*80}\n")
